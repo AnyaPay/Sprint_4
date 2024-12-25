@@ -56,7 +56,7 @@ public class OrderPage {
         driver.findElement(By.xpath(String.format("//div[text()='%s']", dayCount))).click();
     }
 
-    public void chooseScooterColor(Boolean black) {
+    public void chooseScooterColor(boolean black) {
         if (black) {
             driver.findElement(By.id("black")).click();
         } else {

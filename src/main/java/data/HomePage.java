@@ -12,12 +12,12 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void openAccordionQuestion(String xpath) {
-        driver.findElement(By.xpath(xpath)).click();
+    public void openAccordionQuestion(int question) {
+        driver.findElement(By.xpath(String.format(".//div[@id='accordion__heading-%s']", question))).click();
     }
 
     public void assertAccordionAnswer(String accordionAnswer) {
-        driver.findElement(By.xpath(accordionAnswer)).isDisplayed();
+        driver.findElement(By.xpath(String.format(".//p[text()='%s']", accordionAnswer))).isDisplayed();
     }
 
     public void clickOrderButtonFromContent() {
