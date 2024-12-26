@@ -1,18 +1,14 @@
 import data.HomePage;
+import data.constants.URL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,18 +49,17 @@ public class HomeFAQ {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-        new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.className("accordion")));
+        driver.get(URL.HOME_PAGE);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        WebElement element = driver.findElement(By.className("accordion"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
         HomePage homePage = new HomePage(driver);
+        homePage.scrollForAccordion();
+        homePage.checkVisibilityOfAccordion();
         homePage.openAccordionQuestion(question);
         homePage.assertAccordionAnswer(answer);
     }
 
     @After
     public void teardown() {
+        driver.quit();
     }
 }

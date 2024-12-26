@@ -1,5 +1,6 @@
 import data.HomePage;
 import data.OrderPage;
+import data.constants.URL;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -58,7 +59,7 @@ public class OrderScooter {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(URL.HOME_PAGE);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         HomePage homePage = new HomePage(driver);
         homePage.acceptCookies();

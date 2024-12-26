@@ -1,6 +1,10 @@
 package data;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 
@@ -30,5 +34,15 @@ public class HomePage {
 
     public void acceptCookies() {
         driver.findElement(By.id("rcc-confirm-button")).click();
+    }
+
+    public void checkVisibilityOfAccordion() {
+        new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.className("accordion")));
+    }
+
+    public void scrollForAccordion() {
+        WebElement element = driver.findElement(By.className("accordion"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 }
